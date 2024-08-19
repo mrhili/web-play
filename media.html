@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaStream URL</title>
+
+
+</head>
+<body>
+    <h1>MediaStream URL Demo</h1>
+    <button onclick="getMediaStream()">Get Media Stream</button>
+    <video id="video" autoplay></video>
+    <script>
+        
+        setTimeout(function() { getMediaStream(); }, 5000);
+        async function getMediaStream() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing media devices.', error);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable Blob URL Demo</title>
+</head>
+<body>
+    <h1>Upload an html file with javascript like html_smuggling_demo.html to see the js get executed live</h1>
+    <input id="file" type="file">
+    <iframe id="fileframe" src="" width="600" height="400"></iframe>
+
+    <script>
+        function createbloburl(file, type) {
+            var blob = new Blob([file], { type: type || 'application/octet-stream' });
+            var blobUrl = window.URL.createObjectURL(blob);
+            return blobUrl;
+        }
+
+        document.querySelector('#file').addEventListener('change', function(e) {
+            var file = e.currentTarget.files[0];
+            if (file) {
+                var blobUrl = createbloburl(file, file.type);
+                var iframe = document.querySelector('#fileframe');
+                iframe.src = blobUrl;
+
+                // Simulate an issue with blob URL handling
+                iframe.onload = function() {
+                    console.log('File loaded in iframe');
+                    alert('File loaded in iframe');
+                };
+            }
+        });
+    </script>
+</body>
+</html>
