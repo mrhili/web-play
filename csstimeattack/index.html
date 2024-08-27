@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exfiltration Example</title>
+    <!-- This will link to the malicious CSS hosted on the Node.js server -->
+    <link rel="stylesheet" href="http://localhost:5001/style.css">
+</head>
+<body>
+    <h1>CSS SELECTOR TIME ATTACK INSPIRED FROM https://gist.github.com/cgvwzq/6260f0f0a47c009c87b4d46ce3808231</h1>
+    <h2>Login</h2>
+    <form id="login-form">
+        <label for="password">Password:</label>
+        <!-- The "value" here simulates a user typing their password -->
+        <input type="password" id="password" value="supersecret">
+    </form>
+</body>
+</html>
