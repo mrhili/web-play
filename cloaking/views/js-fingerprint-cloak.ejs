@@ -1,0 +1,16 @@
+<!-- views/js-fingerprint-cloak.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Fingerprinting Cloaking</title>
+</head>
+<body>
+    <h1 id="message">Loading...</h1>
+    <script>
+        const screenResolution = window.screen.width + "x" + window.screen.height;
+        const message = screenResolution === "1920x1080" ? "Welcome, Full HD User!" : "Welcome, Visitor!";
+        document.getElementById('message').innerText = message;
+    </script>
+</body>
+</html>

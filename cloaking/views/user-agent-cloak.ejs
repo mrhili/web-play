@@ -1,0 +1,17 @@
+<!-- views/user-agent-cloak.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User-Agent Cloaking</title>
+</head>
+<body>
+    <h1>
+        <% if (isGoogleBot) { %>
+            Hello, Googlebot!
+        <% } else { %>
+            Hello, Human!
+        <% } %>
+    </h1>
+</body>
+</html>

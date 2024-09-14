@@ -1,0 +1,18 @@
+<!-- views/ip-cloak.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IP-Based Cloaking</title>
+</head>
+<body>
+    <h1>
+        <% if (localNetwork) { %>
+            Welcome, Visitor!
+            Hello, Local Network User!
+        <% } else { %>
+            Welcome, Visitor!
+        <% } %>
+    </h1>
+</body>
+</html>
