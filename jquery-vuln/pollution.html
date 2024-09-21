@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+
+  <title>Prototype 
+ Pollution Dynamic Login Demo (Simplified)</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <p>See in the console what happen and past this in the input {   "username": "hacker",   "__proto__": {     "isAdmin": true   } }</p>
+  <form id="login-form">
+    <label for="user-data">User Data:</label>
+    <input type="text" id="user-data" name="user-data">
+    <button type="submit">Submit</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // User database (replace with actual authentication mechanism)
+    const users = {
+      'user1': {
+        username: 'user1',
+        isAdmin: false
+      },
+      'admin': {
+        username: 'admin',
+        isAdmin: true
+      }
+    };
+
+    // Login function
+    function login(user) {
+      if (user.isAdmin) {
+        console.log("You are an administrator.");
+      } else {
+        console.log("You are not an administrator.");
+      }
+    }
+
+    // Exploit logic for the demo
+    $(document).ready(function() {
+      $('#login-form').submit(function(e) {
+        e.preventDefault();
+
+        // Get user data input
+        const userData = $('#user-data').val();
+
+        try {
+          // Parse the user data as JSON
+          const parsedUserData = JSON.parse(userData);
+
+          // Merge the user data with the existing user object
+          users[parsedUserData.username] = Object.assign({}, users[parsedUserData.username], parsedUserData);
+
+          // Call the login function
+          login(users[parsedUserData.username]);
+        } catch (error) {
+          console.error("Invalid user data:", error.message);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype Pollution Mitigation Demo</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <p>This example demonstrates mitigation strategies for prototype pollution.</p>
+  <form id="login-form">
+    <label for="user-data">User Data:</label>
+    <input type="text" id="user-data" name="user-data">
+    <button type="submit">Submit</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // User database (replace with actual authentication mechanism)
+    const users = {
+      'user1': Object.freeze({
+        username: 'user1',
+        isAdmin: false
+      }),
+      'admin': Object.freeze({
+        username: 'admin',
+        isAdmin: true
+      })
+    };
+
+    // Login function
+    function login(user) {
+      if (user.isAdmin) {
+        console.log("You are an administrator.");
+      } else {
+        console.log("You are not an administrator.");
+      }
+    }
+
+    // Mitigating prototype pollution
+    function safeMerge(target, source) {
+      const allowedProperties = ['username']; // Define allowed properties
+      const safeSource = {};
+      for (const key of Object.keys(source)) {
+        if (allowedProperties.includes(key)) {
+          safeSource[key] = Object.freeze(source[key]);
+        }
+      }
+      return Object.assign({}, target, safeSource);
+    }
+
+    // Exploit logic for the demo (commented out)
+    // const maliciousItem = {
+    //   "username": "hacker",
+    //   "__proto__": {
+    //     "isAdmin": true
+    //   }
+    // };
+
+    $(document).ready(function() {
+      $('#login-form').submit(function(e) {
+        e.preventDefault();
+
+        // Get user data input
+        const userData = $('#user-data').val();
+
+        try {
+          // Parse the user data as JSON
+          const parsedUserData = JSON.parse(userData);
+
+          // Safe merge user data (prevents prototype pollution)
+          users[parsedUserData.username] = safeMerge(users[parsedUserData.username] || {}, parsedUserData);
+
+          // Call the login function
+          login(users[parsedUserData.username]);
+        } catch (error) {
+          console.error("Invalid user data:", error.message);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

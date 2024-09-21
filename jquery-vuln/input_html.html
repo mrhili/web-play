@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS in input</title>
+</head>
+<body>
+    <input id="name" value=""><button id="btn">enter</button>
+    <div id="display"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $("#btn").on("click",function(){
+        var username = $('#name').val();  // This gets the input value
+        //$('#btn').after("<br>Hello " + username);  // Injects directly into the DOM
+        $('#display').html(username);
+    });
+    
+</script>
+
+</body>
+</html>

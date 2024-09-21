@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS</title>
+</head>
+<body>
+    <h1 id="title">title1</h1>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>
+        $(window).on('hashchange', function() {
+            var payload = decodeURIComponent(location.hash.slice(1));
+            var element = $('h1:contains("' + payload + '")');  // This selector evaluates untrusted input
+            if (element.length) {
+                element.get(0).scrollIntoView();
+            }
+        });
+    </script>
+
+</body>
+</html>
