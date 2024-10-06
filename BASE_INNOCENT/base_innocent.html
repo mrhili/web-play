@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="Description" content = "">
+<title>INNOCENT</title>
+
+<link rel="stylesheet" href="/go.css">
+ 
+</head>
+<body>
+ 
+<h1 id="titre">Sans titre</h1>
+
+<!-- <base href="/EVIL/" target="_self"> -->
+ 
+<p onclick="addInput(this,'insert_input')">CLICK HERE TO CHANGE TITLE</p>
+ 
+<div id="insert_input"></div> 
+ 
+<p onclick="changeTitle('toto')">CLICK HERE TO CHANGE TITLE AS TOTO</p>
+ 
+ 
+<script>
+function addInput(element,id_cible)
+{
+	var input = '<input type="text" /><button onclick="changeTitle(this.previousSibling.value);">Changer le titre avec le contenu de l\'input text ci-contre</button>';	
+ 
+        document.getElementById(id_cible).innerHTML = input;
+ 
+	element.remove();
+}
+ 
+function changeTitle(value)
+{
+	document.getElementById("titre").innerHTML = value;
+}
+</script>
+
+<a href="#titre">TOP</a>
+ 
+</body>
+</html>
