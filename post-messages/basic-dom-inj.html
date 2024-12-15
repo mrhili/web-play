@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PostMessage XSS Demo</title>
+</head>
+<body>
+    <h1>Message from postMessage:</h1>
+    <div id="output"></div>
+
+    <script>
+        window.addEventListener('message', (event) => {
+            // Directly insert received data into the DOM (vulnerable)
+            document.getElementById('output').innerHTML = event.data;
+        });
+    </script>
+</body>
+</html>
+
+
+<!-- // Target domain where the above code is hosted
+ py -m http.server 
+ python3 -m http.server
+let target = "http://127.0.0.1:8000/basic-dom-inj.html";
+window.postMessage('<img src="x" onerror="alert(1)">', target); -->
